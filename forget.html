@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-5.3.2-dist/css/bootstrap.css" />
+    <style>
+      #myForm {
+        width: 400px;
+        height: 250px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form
+      id="myForm"
+      class="position-absolute top-50 start-50 translate-middle border border-info rounded-3 shadow p-3 mb-5 bg-white rounded"
+    >
+      <div class="form-group">
+        <h3 class="text-center med">forget password</h3>
+        <br />
+        <labale for="phoneNum"
+          ><span style="color: red">*</span> phone number :
+        </labale>
+        <input type="text" class="form-control" id="phoneNum" />
+        <span style="display: none" class="small" id="errorMsg"
+          >Phone number is required</span
+        >
+      </div>
+      <button
+        id="submitBtn"
+        disabled="true"
+        type="submit"
+        class="btn btn-success m-3"
+      >
+        Password recovery
+      </button>
+    </form>
+
+    <script>
+      function hasValue(input) {
+        return input.value.trim() !== "";
+      }
+      const form = document.getElementById("myForm");
+      const phoneNum = document.getElementById("phoneNum");
+      const submitBtn = document.getElementById("submitBtn");
+
+      phoneNum.addEventListener("input", function (event) {
+        if (hasValue(phoneNum)) {
+          submitBtn.disabled = false;
+        }
+      });
+      document
+        .getElementById("errorMsg")
+        .addEventListener("input", function () {
+          let inputValue = this.value.trim();
+        });
+    </script>
+  </body>
+</html>
