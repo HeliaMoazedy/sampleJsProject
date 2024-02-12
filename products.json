@@ -1,0 +1,78 @@
+{
+  "perfume": [
+    {
+      "id": 100,
+      "name": "coco",
+      "price": 200,
+      "image": "../images/coco.jpg"
+    },
+    {
+      "id": 101,
+      "name": "channel",
+      "price": 300,
+      "image": "../images/channel.jpg"
+    },
+    {
+      "id": 102,
+      "name": "dior",
+      "price": 500,
+      "image": "../images/dior.jpg"
+    },
+    {
+      "id": 103,
+      "name": "Gucci",
+      "price": 600,
+      "image": "../images/gucci.jpg"
+    },
+    {
+      "id": 104,
+      "name": "Burberry",
+      "price": 300,
+      "image": "../images/Burberry.jpg"
+    },
+    {
+      "id": 105,
+      "name": "Armani",
+      "price": 100,
+      "image": "../images/Armani.jpg"
+    }
+  ],
+  "cosmetic": [
+    {
+      "id": 200,
+      "name": "cream",
+      "price": 200,
+      "image": "../images/cream.jpg"
+    },
+    {
+      "id": 201,
+      "name": "concealer",
+      "price": 300,
+      "image": "../images/concealer.jpg"
+    },
+    {
+      "id": 202,
+      "name": "Mascara",
+      "price": 500,
+      "image": "../images/Mascara.jpg"
+    },
+    {
+      "id": 203,
+      "name": "Eyeliner",
+      "price": 600,
+      "image": "../images/Eyeliner.png"
+    },
+    {
+      "id": 204,
+      "name": "Primer",
+      "price": 800,
+      "image": "../images/Primer.jpg"
+    },
+    {
+      "id": 205,
+      "name": "Face Powder",
+      "price": 100,
+      "image": "../images/FacePowder.jpg"
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="styles/normalizer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <title>Main Page</title>
+    <style>
+      .icon-select {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar py-3" style="background-color: #d384a0">
+        <div class="container ">
+          <div class="drowpdown col-md-4">
+            <button
+              class="btn btn-secondary dropdown-toggle icon-select"
+              type="button"
+              id="dropdownMenuButton"
+              aria-expanded="false"
+            >
+              <i class="fa fa-solid fa-user" style="font-size: 20px"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a href="#" class="dropdown-item" data-value="1">Profile</a>
+              </li>
+              <li><a href="logIn.html" class="dropdown-item" data-value="2">Exit</a></li>
+            </ul>
+          </div>
+
+          <a id="title" class="navbar-brand mx-1 col-lg-3 text-light" href="#">Cosmetics shop</a>
+          <div id="selected-item" class="rounded ">
+            <button
+              type="button"
+              class="btn btn-secondary position-relative "
+              id="selected-items"
+              style="background-color: #60a58d"
+            >
+              selected items
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black"
+                id="valueSelectedItem"
+                >0</span
+              >
+            </button>
+          </div>
+          <button
+            type="button"
+            class="navbar-toggler "
+            id="menuActivation"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#staticBackdrop"
+            aria-controls="staticBackdrop"
+          >
+            <span class="navbar-toggler-icon t"></span>
+          </button>
+        </div>
+      </nav>
+      <menu
+        class="offcanvas offcanvas-end pt-3"
+        data-bs-backdrop="static"
+        tabindex="-1"
+        id="staticBackdrop"
+        aria-labelledby="staticBackdropLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            Categories
+          </h5>
+          <button
+            type="button"
+            id="btn-menu-close"
+            class="btn-close mx-2"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                href=""
+                class="nav-link active"
+                onclick="changeCategory('perfume')"
+                >perfume</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href=""
+                class="nav-link active"
+                id="Cosmetics"
+                onclick="changeCategory('cosmetic')"
+                >Cosmetics</a
+              >
+            </li>
+          </ul>
+        </div>
+      </menu>
+    </header>
+    <main>
+      <div class="d-flex flex-wrap container flex-row my-5 text-center" id="product-list">
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function inceaseValue() {
+        let span = document.getElementById("valueSelectedItem");
+        let currentValue = parseInt(span.textContent);
+        span.textContent = currentValue + 1;
+      }
+      function deceaseValue() {
+        let span = document.getElementById("valueSelectedItem");
+        let currentValue = parseInt(span.textContent);
+        if (currentValue !== 0) span.textContent = currentValue - 1;
+      }
+
+      // Handle click event for dropdown toggle
+      document
+        .querySelector(".icon-select")
+        .addEventListener("click", function () {
+          document.querySelector(".dropdown-menu").classList.toggle("show");
+        });
+
+      // Handle click event for dropdown items
+      // document.querySelectorAll(".dropdown-item").forEach((item) => {
+      //   item.addEventListener("click", function () {
+      //     const selectedItem = this.querySelector("i").cloneNode(true);
+      //     document.querySelector(".icon-select").innerHTML =
+      //       selectedItem.outerHTML;
+      //     document.querySelector(".dropdown-menu").classList.remove("show");
+      //   });
+      // });
+
+
+      document.addEventListener("click", function (event) {
+        const dropdown = document.querySelector(".dropdown-menu");
+        const icon = document.querySelector(".icon-select");
+        if (!dropdown.contains(event.target) && !icon.contains(event.target)) {
+          dropdown.classList.remove("show");
+        }
+      });
+    </script>
+
+    <script>
+      // Construct URLSearchParams object instance from current URL querystring.
+      var queryParams = new URLSearchParams(window.location.search);
+      // Set new or modify existing parameter value.
+      const category = window.location.href.split("?")[1].split('=')[1]
+      fetchAndDisplayProducts(category);
+      
+
+      // Replace current querystring with the new one.
+      history.replaceState(null, null, "?" + queryParams.toString());
+
+      // Function to parse URL parameters ?
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      // Function to fetch JSON data and update page content
+      function fetchAndDisplayProducts(category) {
+        fetch("../products.json")
+          .then((response) => response.json())
+          .then((data) => {
+             var productList = document.getElementById("product-list");
+            productList.innerHTML = ""; // Clear previous content
+            if (data.hasOwnProperty(category)) {
+              var products = data[category];
+              products.forEach((product) => {
+                var productElement = document.createElement("div");
+                productElement.classList.add("col-lg-4" , "col-12" ,"card" );
+
+                productElement.innerHTML = `
+                      <h2 class="card-title mt-4">${product.name}</h2>
+                      <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
+                      <p class="card-price  me-2 my-4">Price: $${product.price}
+                        <a
+                        href="#"
+                        class="btn btn-secondary "
+                        onclick="inceaseValue()"
+                        style="background-color: #929fba; width: 35px"
+                      >+</a>
+                      <a
+                        href="#"
+                        class="btn btn-secondary"
+                        id="removeItem"
+                        onclick="deceaseValue()"
+                        style="background-color: #929fba; width: 35px"
+                      >-</a>
+                      </p>
+                  `;
+                  
+                productList.appendChild(productElement);
+              });
+            } else {
+              productList.innerHTML =
+                "<p>No products found for this category.</p>";
+            }
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      }
+
+      
+
+      // Function to change category and update URL
+      function changeCategory(category) {
+        var newUrl =
+          window.location.href.split("?")[0] + "?category=" + category;
+        window.history.pushState({ path: newUrl }, "", newUrl); 
+      }
+
+
+
+    </script>
+    <footer style="background-color: #929fba" class="text-light">
+      <div class="container mt-5 pb-4 pt-4">
+        <div class="row">
+          <!-- first col -->
+          <div class="col-md-3 text-center">
+            <h5 class="col1-title">About</h5>
+            <p>This is perfume shop page .</p>
+            <p>
+              Made with by
+              <a class="ml-1" href="main.html">Helia</a>
+            </p>
+          </div>
+
+          <!-- second col -->
+          <div class="col-md-3 text-center">
+            <h5 class="col2-title">Categories</h5>
+            <div class="footer-menu">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a
+                    href=""
+                    class="nav-link active"
+                    onclick="changeCategory('perfume')"
+                    >perfume</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href=""
+                    class="nav-link active"
+                    onclick="changeCategory('cosmetic')"
+                    >Cosmetics</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- third col -->
+          <div class="col-md-3 text-center">
+            <h5 class="col3-title">Contact</h5>
+            <div class="footer-menu">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="" class="nav-link active " >Call Center</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link active">Email Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link active">Term &amp; Conditions</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4 col -->
+          <div class="col-md-3 text-center">
+            <h5 class="col3-title">Social</h5>
+            <div class="social pt-3">
+              <a href="#"
+                ><i class="fa fa-linkedin mx-1 text-light" style="font-size: 25px"></i
+              ></a>
+              <a href="#"
+                ><i class="fa fa-telegram mx-1 text-light" style="font-size: 25px"></i
+              ></a>
+              <a href="#"
+                ><i class="fa fa-whatsapp mx-1 text-light" style="font-size: 25px"></i
+              ></a>
+              <a href="#"
+                ><i class="fa fa-skype mx-1 text-light" style="font-size: 25px"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2024 Copyright:
+        <a class="text-light" href="main.html">cosmetic</a>
+      </div>
+    </footer>
+  </body>
+</html>
