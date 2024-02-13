@@ -20,7 +20,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <title>category Page</title>
+    <title>Main Page</title>
     <style>
       .icon-select {
         cursor: pointer;
@@ -48,7 +48,7 @@
             </ul>
           </div>
 
-          <a id="title" class="navbar-brand mx-1 col-lg-3 text-light" href="main.html">Cosmetics shop</a>
+          <a id="title" class="navbar-brand mx-1 col-lg-3 text-light" href="#">Cosmetics shop</a>
           <div id="selected-item" class="rounded ">
             <button
               type="button"
@@ -99,27 +99,24 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a
-                href=""
+                href="category.html?category=perfume"
                 class="nav-link active"
-                onclick="changeCategory('perfume')"
                 >perfume</a
               >
             </li>
             <li class="nav-item">
               <a
-                href=""
+              href="category.html?category=cosmetic"
                 class="nav-link active"
                 id="Cosmetics"
-                onclick="changeCategory('cosmetic')"
                 >Cosmetics</a
               >
             </li>
             <li class="nav-item">
               <a
-                href=""
+              href="category.html?category=SkinCare"
                 class="nav-link active"
                 id="SkinCare"
-                onclick="changeCategory('SkinCare')"
                 >Skin care</a
               >
             </li>
@@ -128,7 +125,45 @@
       </menu>
     </header>
     <main>
-      <div class="d-flex flex-wrap container flex-row my-5 text-center" id="product-list">
+      <div id="carouselDark" class="carousel carousel-dark slide mt-2">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img src="../images//ArmaniPerfume.jpg" class="d-block mx-auto" alt="...">
+            <div class="carousel-caption">
+              <h3 class="h3-responsive">Armani</h3>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="../images/BurberryBanner.jpg" class="d-block mx-auto " alt="...">
+            <div class="carousel-caption ">
+              <h3 class="h3-responsive">Burberry </h3>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../images/diorBanner.jpg" class="d-block mx-auto" alt="...">
+            <div class="carousel-caption">
+              <h3 class="h3-responsive text-light">dior </h3>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+     
+      <div class="d-flex flex-wrap container flex-row my-5 text-center" id="product-list-main" >
+        <h2 class="text-center  ">cosmatic
+          <button type="button" class="btn btn-secondary "><a href="" class="text-light text-decoration-none">More</a></button>
+        </h2>
       </div>
     </main>
     <script
@@ -155,17 +190,6 @@
           document.querySelector(".dropdown-menu").classList.toggle("show");
         });
 
-      // Handle click event for dropdown items
-      // document.querySelectorAll(".dropdown-item").forEach((item) => {
-      //   item.addEventListener("click", function () {
-      //     const selectedItem = this.querySelector("i").cloneNode(true);
-      //     document.querySelector(".icon-select").innerHTML =
-      //       selectedItem.outerHTML;
-      //     document.querySelector(".dropdown-menu").classList.remove("show");
-      //   });
-      // });
-
-
       document.addEventListener("click", function (event) {
         const menu = document.getElementById("staticBackdrop");
         const body = document.querySelector(".offcanvas-body");
@@ -174,13 +198,6 @@
         }
       });
 
-      // document.addEventListener("click", function (event) {
-      //   const dropdown = document.querySelector(".dropdown-menu");
-      //   const icon = document.querySelector(".icon-select");
-      //   if (!dropdown.contains(event.target) ) {
-      //     dropdown.classList.remove("show");
-      //   }
-      // });
     </script>
 
     <script>
@@ -191,26 +208,11 @@
       //after ? is keapen so we choes index 1
       fetchAndDisplayProducts(category);
       
-
-      // // Replace current querystring with the new one.
-      // history.replaceState(null, null, "?" + queryParams.toString());
-
-      // // Function to parse URL parameters ?
-      // function getUrlParameter(name) {
-      //   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-      //   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-      //   var results = regex.exec(location.search);
-      //   return results === null
-      //     ? ""
-      //     : decodeURIComponent(results[1].replace(/\+/g, " "));
-      // }
-
-      // Function to fetch JSON data and update page content
       function fetchAndDisplayProducts(category) {
-        fetch("../products.json")
+        fetch("../bestSeller.json")
           .then((response) => response.json())
           .then((data) => {
-             var productList = document.getElementById("product-list");
+             var productList = document.getElementById("product-list-main");
             productList.innerHTML = ""; // Clear previous content
             if (data.hasOwnProperty(category)) {
               var products = data[category];
@@ -248,6 +250,21 @@
           .catch((error) => console.error("Error fetching data:", error));
       }
 
+      function fetchAndDisplayProductsMain(){
+        fetch("../bestSeller.json").then((response)=> response.json()).then( (data)=>{
+          var bestSellerList = document.getElementById("product-main-list");
+          bestSellerList.innerHTML="";
+          let product = data[banner];
+          product.forEach((product)=>{
+            let createElement = document.createElement("div");
+            createElement.innerHTML=`
+            <h2>${product.name}</h2>
+            <img src="${product.image}">
+            `;
+          })
+        })
+      }
+      
       
 
       // Function to change category and update URL
@@ -268,7 +285,7 @@
             <h5 class="col1-title">About</h5>
             <p>This is perfume shop page .</p>
             <p>
-              Made with &#10084; by
+              Made with by
               <a class="ml-1" href="main.html">Helia</a>
             </p>
           </div>

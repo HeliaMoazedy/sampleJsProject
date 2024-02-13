@@ -7,28 +7,10 @@
       "image": "../images/coco.jpg"
     },
     {
-      "id": 101,
-      "name": "channel",
-      "price": 300,
-      "image": "../images/channel.jpg"
-    },
-    {
-      "id": 102,
-      "name": "dior",
-      "price": 500,
-      "image": "../images/dior.jpg"
-    },
-    {
       "id": 103,
       "name": "Gucci",
       "price": 600,
       "image": "../images/gucci.jpg"
-    },
-    {
-      "id": 104,
-      "name": "Burberry",
-      "price": 300,
-      "image": "../images/Burberry.jpg"
     },
     {
       "id": 105,
@@ -38,18 +20,6 @@
     }
   ],
   "cosmetic": [
-    {
-      "id": 200,
-      "name": "lipstick",
-      "price": 200,
-      "image": "../images/lipstick.jpg"
-    },
-    {
-      "id": 201,
-      "name": "concealer",
-      "price": 300,
-      "image": "../images/concealer.jpg"
-    },
     {
       "id": 202,
       "name": "Mascara",
@@ -67,12 +37,6 @@
       "name": "Primer",
       "price": 800,
       "image": "../images/Primer.jpg"
-    },
-    {
-      "id": 205,
-      "name": "Face Powder",
-      "price": 100,
-      "image": "../images/FacePowder.jpg"
     }
   ],
   "SkinCare": [
@@ -83,34 +47,34 @@
       "image": "../images/micellarWater.jpg"
     },
     {
-      "id": 301,
-      "name": "cream",
-      "price": 300,
-      "image": "../images/cream.jpg"
-    },
-    {
       "id": 302,
       "name": "Hydrabio",
       "price": 500,
       "image": "../images/Hydrabio.jpg"
     },
     {
-      "id": 303,
-      "name": "toner",
-      "price": 600,
-      "image": "../images/toner.jpg"
-    },
-    {
-      "id": 304,
-      "name": "sunscreen",
-      "price": 800,
-      "image": "../images/sunscreen.jpg"
-    },
-    {
       "id": 305,
       "name": "cleanser",
       "price": 100,
       "image": "../images/cleanser.jpg"
+    }
+  ],
+  "banner": [
+    {
+      "id": 1000,
+      "name": "Armani",
+      "image": "../images//ArmaniPerfume.jpg"
+    },
+    {
+      "id": 1002,
+      "name": "Burberry",
+      "image": "../images/BurberryBanner.jpg"
+    },
+    {
+      "id": 1003,
+      "name": "Gucci",
+      "price": 600,
+      "image": "../images/diorBanner.jpg"
     }
   ]
 }
