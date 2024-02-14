@@ -1,64 +1,72 @@
 {
-  "perfume": [
-    {
-      "id": 100,
-      "name": "coco",
-      "price": 200,
-      "image": "../images/coco.jpg"
-    },
-    {
-      "id": 103,
-      "name": "Gucci",
-      "price": 600,
-      "image": "../images/gucci.jpg"
-    },
-    {
-      "id": 105,
-      "name": "Armani",
-      "price": 100,
-      "image": "../images/Armani.jpg"
-    }
-  ],
-  "cosmetic": [
-    {
-      "id": 202,
-      "name": "Mascara",
-      "price": 500,
-      "image": "../images/Mascara.jpg"
-    },
-    {
-      "id": 203,
-      "name": "Eyeliner",
-      "price": 600,
-      "image": "../images/Eyeliner.png"
-    },
-    {
-      "id": 204,
-      "name": "Primer",
-      "price": 800,
-      "image": "../images/Primer.jpg"
-    }
-  ],
-  "SkinCare": [
-    {
-      "id": 300,
-      "name": "micellar water",
-      "price": 200,
-      "image": "../images/micellarWater.jpg"
-    },
-    {
-      "id": 302,
-      "name": "Hydrabio",
-      "price": 500,
-      "image": "../images/Hydrabio.jpg"
-    },
-    {
-      "id": 305,
-      "name": "cleanser",
-      "price": 100,
-      "image": "../images/cleanser.jpg"
-    }
-  ],
+  "products": {
+    "perfume": [
+      {
+        "id": 100,
+        "name": "coco",
+        "price": 200,
+        "image": "../images/coco.jpg"
+      },
+      {
+        "id": 103,
+        "name": "Gucci",
+        "price": 600,
+        "image": "../images/gucci.jpg"
+      },
+      {
+        "id": 105,
+        "name": "Armani",
+        "price": 100,
+        "image": "../images/Armani.jpg"
+      }
+    ],
+    "cosmetic": [
+      {
+        "id": 202,
+        "name": "Mascara",
+        "price": 500,
+        "image": "../images/Mascara.jpg"
+      },
+      {
+        "id": 203,
+        "name": "Eyeliner",
+        "price": 600,
+        "image": "../images/Eyeliner.png"
+      },
+      {
+        "id": 204,
+        "name": "Primer",
+        "price": 800,
+        "image": "../images/Primer.jpg"
+      },
+      {
+        "id": 200,
+        "name": "lipstick",
+        "price": 200,
+        "image": "../images/lipstick.jpg"
+      }
+    ],
+    "SkinCare": [
+      {
+        "id": 300,
+        "name": "micellar water",
+        "price": 200,
+        "image": "../images/micellarWater.jpg"
+      },
+      {
+        "id": 302,
+        "name": "Hydrabio",
+        "price": 500,
+        "image": "../images/Hydrabio.jpg"
+      },
+      {
+        "id": 305,
+        "name": "cleanser",
+        "price": 100,
+        "image": "../images/cleanser.jpg"
+      }
+    ]
+  },
   "banner": [
     {
       "id": 1000,

@@ -127,27 +127,15 @@
     <main>
       <div id="carouselDark" class="carousel carousel-dark slide mt-2">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <!-- <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
+          <div class="carousel-item active">
             <img src="../images//ArmaniPerfume.jpg" class="d-block mx-auto" alt="...">
             <div class="carousel-caption">
               <h3 class="h3-responsive">Armani</h3>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <img src="../images/BurberryBanner.jpg" class="d-block mx-auto " alt="...">
-            <div class="carousel-caption ">
-              <h3 class="h3-responsive">Burberry </h3>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../images/diorBanner.jpg" class="d-block mx-auto" alt="...">
-            <div class="carousel-caption">
-              <h3 class="h3-responsive text-light">dior </h3>
             </div>
           </div>
         </div>
@@ -159,12 +147,7 @@
         </button>
       </div>
 
-     
-      <div class="d-flex flex-wrap container flex-row my-5 text-center" id="product-list-main" >
-        <h2 class="text-center  ">cosmatic
-          <button type="button" class="btn btn-secondary "><a href="" class="text-light text-decoration-none">More</a></button>
-        </h2>
-      </div>
+      <div class="flex-wrap container flex-row my-5 text-center" id="product-list-main"></div>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -201,80 +184,85 @@
     </script>
 
     <script>
-      // Construct URLSearchParams object instance from current URL querystring.
-      var queryParams = new URLSearchParams(window.location.search);
-      // Set new or modify existing parameter value.
-      const category = window.location.href.split("?")[1].split('=')[1]
-      //after ? is keapen so we choes index 1
-      fetchAndDisplayProducts(category);
-      
-      function fetchAndDisplayProducts(category) {
-        fetch("../bestSeller.json")
-          .then((response) => response.json())
-          .then((data) => {
-             var productList = document.getElementById("product-list-main");
-            productList.innerHTML = ""; // Clear previous content
-            if (data.hasOwnProperty(category)) {
-              var products = data[category];
-              products.forEach((product) => {
-                var productElement = document.createElement("div");
-                productElement.classList.add("col-lg-4" , "col-12" ,"card" );
+    fetch('../bestSeller.json')
+    .then(response => response.json())
+    .then(data => {
+      let productListMain = document.getElementById("product-list-main");
+      let products = data.products;
 
-                productElement.innerHTML = `
-                      <h2 class="card-title mt-4">${product.name}</h2>
-                      <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
-                      <p class="card-price  me-2 my-4">Price: $${product.price}
-                        <a
-                        href="#"
-                        class="btn btn-secondary "
-                        onclick="inceaseValue()"
-                        style="background-color: #929fba; width: 35px"
-                      >+</a>
-                      <a
-                        href="#"
-                        class="btn btn-secondary"
-                        id="removeItem"
-                        onclick="deceaseValue()"
-                        style="background-color: #929fba; width: 35px"
-                      >-</a>
-                      </p>
+      for (let category in products) {
+        let categoryProducts = products[category];
+
+       for(let j = 0; j < 3; j += 3){
+        let outerElement= document.createElement("div");
+        productListMain.appendChild(outerElement)
+         
+        
+        let categoryTitle = document.createElement("h2");
+        outerElement.appendChild(categoryTitle);
+        categoryTitle.innerHTML=`
+          <h2 class="text-center my-4 ">${category}
+           <button type="button" class="btn btn-secondary "><a href="category.html?category=perfume" class="text-light text-decoration-none">More</a></button>
+          </h2>
+          `
+          let row = document.createElement("div");
+          row.classList.add("row");
+          outerElement.appendChild(row);
+          
+          for (let i = 0; i < 3; i++) {
+            let product = categoryProducts[i];
+            let productElement = document.createElement("div");
+            productElement.classList.add("col-lg-4" , "col-12" ,"card" );
+            productElement.innerHTML = `
+                  <h2 class="card-title mt-4">${product.name}</h2>
+                  <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
+                  <p class="card-price  me-2 my-4">Price: $${product.price}
+                  <a
+                    href="#"
+                    class="btn btn-secondary "
+                    onclick="inceaseValue()"
+                    style="background-color: #929fba; width: 35px"
+                    >+</a>
+                    <a
+                      href="#"
+                      class="btn btn-secondary"
+                      id="removeItem"
+                      onclick="deceaseValue()"
+                      style="background-color: #929fba; width: 35px"
+                    >-</a>
+                    </p>
                   `;
-                  
-                productList.appendChild(productElement);
-              });
-            } else {
-              productList.innerHTML =
-                "<p>No products found for this category.</p>";
-            }
-          })
-          .catch((error) => console.error("Error fetching data:", error));
-      }
 
-      function fetchAndDisplayProductsMain(){
-        fetch("../bestSeller.json").then((response)=> response.json()).then( (data)=>{
-          var bestSellerList = document.getElementById("product-main-list");
-          bestSellerList.innerHTML="";
-          let product = data[banner];
-          product.forEach((product)=>{
-            let createElement = document.createElement("div");
-            createElement.innerHTML=`
-            <h2>${product.name}</h2>
-            <img src="${product.image}">
-            `;
-          })
-        })
-      }
-      
-      
+            row.appendChild(productElement);
+        }
+    }
+  }
+    })
+    .catch(error => console.error('Error loading JSON:', error));
 
-      // Function to change category and update URL
-      function changeCategory(category) {
-        var newUrl =
-          window.location.href.split("?")[0] + "?category=" + category;
-        window.history.pushState({ path: newUrl }, "", newUrl); 
-      }
+    fetch('../bestSeller.json')
+    .then(response => response.json())
+    .then(data => {
+      let carouselIndicators = document.getElementsByClassName("carousel-indicators")[0];
+      let carouselInner = document.getElementsByClassName("carousel-inner")[0];
+      let productBanner = data.banner;
 
+      productBanner.forEach((item,index) => {
+        let btnItem = document.createElement('button');
+        btnItem.setAttribute('data-bs-target','#carouselDark')
+        btnItem.setAttribute('aria-label',slide[index])
+        btnItem.setAttribute('data-bs-slide-to',index)
+        carouselIndicators.appendChild(btnItem)
+        if(index===0){
+          btnItem.setAttribute('aria-current','true')
+          btnItem.classList.add('active')
+        }
 
+      });
+  
+    })
+    .catch(error => console.error('Error loading JSON:', error));
+</script>
 
     </script>
     <footer style="background-color: #929fba" class="text-light">
@@ -284,8 +272,8 @@
           <div class="col-md-3 text-center">
             <h5 class="col1-title">About</h5>
             <p>This is perfume shop page .</p>
-            <p>
-              Made with by
+               <p>
+              Made with &#10084; by
               <a class="ml-1" href="main.html">Helia</a>
             </p>
           </div>
@@ -297,18 +285,25 @@
               <ul class="navbar-nav">
                 <li class="nav-item">
                   <a
-                    href=""
+                  href="category.html?category=perfume"
+                  class="nav-link active"
+                  >perfume</a
+                >
+                </li>
+                <li class="nav-item">
+                  <a
+                  href="category.html?category=cosmetic"
                     class="nav-link active"
-                    onclick="changeCategory('perfume')"
-                    >perfume</a
+                    id="Cosmetics"
+                    >Cosmetics</a
                   >
                 </li>
                 <li class="nav-item">
                   <a
-                    href=""
+                  href="category.html?category=SkinCare"
                     class="nav-link active"
-                    onclick="changeCategory('cosmetic')"
-                    >Cosmetics</a
+                    id="SkinCare"
+                    >Skin care</a
                   >
                 </li>
               </ul>
