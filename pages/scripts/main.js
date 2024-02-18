@@ -21,7 +21,7 @@ document.addEventListener("click", function (event) {
     menu.classList.remove("show");
   }
 });
-fetch("../bestSeller.json")
+fetch("http://localhost:3000/bestSeller")
   .then((response) => response.json())
   .then((data) => {
     let productListMain = document.getElementById("product-list-main");
@@ -76,7 +76,7 @@ fetch("../bestSeller.json")
   })
   .catch((error) => console.error("Error loading JSON:", error));
 
-fetch("../bestSeller.json")
+fetch("http://localhost:3000/bestSeller")
   .then((response) => response.json())
   .then((data) => {
     let carousel = document.getElementById("carouselDark");
