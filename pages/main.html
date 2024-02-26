@@ -19,10 +19,19 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../styles/main.css">
     <title>Main Page</title>
   </head>
-  <body>
-    <header>
+  <body onload="loadFunction()">
+    <div  id="loader" class="loader position-absolute top-50 start-50 translate-middle">
+      <!-- <div class="spinner-border text-info " style="width: 5rem; height: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span> -->
+        <div class="loader_cube loader_cube--color"></div>
+        <div class="loader_cube loader_cube--glowing"></div>
+      </div>
+    </div>
+   
+    <header style="display: none;" id="myHeader">
       <nav class="navbar py-3" style="background-color: #d384a0">
         <div class="container ">
           <div class="drowpdown col-md-4">
@@ -30,7 +39,7 @@
               class="btn btn-secondary dropdown-toggle icon-select"
               type="button"
               id="dropdownMenuButton"
-              aria-expanded="false"
+              aria-expanded="false" onclick="toggleMenu()"
             >
               <i class="fa fa-solid fa-user" style="font-size: 20px"></i>
             </button>
@@ -49,7 +58,7 @@
               class="btn btn-secondary position-relative "
               id="selected-items"
             >
-              selected items
+              <a href="selectedItem.html" style="text-decoration: none; color: white;">selected items</a>
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black"
                 id="valueSelectedItem"
@@ -65,7 +74,7 @@
             data-bs-target="#staticBackdrop"
             aria-controls="staticBackdrop"
           >
-            <span class="navbar-toggler-icon t"></span>
+            <span class="navbar-toggler-icon "></span>
           </button>
         </div>
       </nav>
@@ -117,7 +126,7 @@
         </div>
       </menu>
     </header>
-    <main>
+    <main style="display: none;" id="myMain">
       <div id="carouselDark" class="carousel carousel-dark slide mt-2">
         <div class="carousel-indicators"></div>
         <div class="carousel-inner"></div>
@@ -131,8 +140,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="./scripts/main.js"></script>
-    
-    <footer style="background-color: #929fba" class="text-light">
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+
+    <footer style="background-color: #929fba ; display: none;" class="text-light" id="myFooter">
       <div class="container mt-5 pb-4 pt-4">
         <div class="row">
           <!-- first col -->

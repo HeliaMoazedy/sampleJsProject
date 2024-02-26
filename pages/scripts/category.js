@@ -10,9 +10,18 @@ function deceaseValue() {
 }
 
 // Handle click event for dropdown toggle
-document.querySelector(".icon-select").addEventListener("click", function () {
-  document.querySelector(".dropdown-menu").classList.toggle("show");
-});
+const menu = document.querySelector(".dropdown-menu");
+
+const toggleMenu = () => menu.classList.toggle("show");
+
+window.onclick = (event) => {
+  if (!event.target.matches(".icon-select")) {
+    if (menu.classList.contains("show")) {
+      menu.classList.remove("show");
+    }
+  }
+};
+
 
 // Handle click event for dropdown items
 // document.querySelectorAll(".dropdown-item").forEach((item) => {
@@ -61,7 +70,7 @@ fetchAndDisplayProducts(category);
 
 // Function to fetch JSON data and update page content
 function fetchAndDisplayProducts(category) {
-  fetch("../products.json")
+  fetch("http://localhost:3000/products")
     .then((response) => response.json())
     .then((data) => {
       var productList = document.getElementById("product-list");
@@ -73,18 +82,18 @@ function fetchAndDisplayProducts(category) {
           productElement.classList.add("col-lg-4", "col-12", "card");
 
           productElement.innerHTML = `
-                      <h2 class="card-title mt-4">${product.name}</h2>
-                      <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
-                      <p class="card-price  me-2 my-4">Price: $${product.price}
+                      <h2 class="card-title hide-text mt-4">${product.name}</h2>
+                      <img class= "mx-auto  d-block card-image-top rounded mt-2 skeleton" src="${product.image}" alt="${product.name}">
+                      <p class="card-price hide-text  me-2 my-4">Price: $${product.price}
                         <a
                         href="#"
-                        class="btn btn-secondary "
+                        class="btn btn-secondary btn-increase "
                         onclick="inceaseValue()"
                         style="background-color: #929fba; width: 35px"
                       >+</a>
                       <a
                         href="#"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary btn-decrease"
                         id="removeItem"
                         onclick="deceaseValue()"
                         style="background-color: #929fba; width: 35px"
@@ -105,4 +114,19 @@ function fetchAndDisplayProducts(category) {
 function changeCategory(category) {
   var newUrl = window.location.href.split("?")[0] + "?category=" + category;
   window.history.pushState({ path: newUrl }, "", newUrl);
+}
+
+function loadFunction() {
+  let load = setTimeout(showFunction, 1500);
+}
+function showFunction() {
+  const loader = document.getElementById("loader");
+  const myHeader = document.getElementById("myHeader");
+  const myMain = document.getElementById("myMain");
+  const myFooter = document.getElementById("myFooter");
+
+  loader.style.display = "none";
+  myHeader.style.display = "block";
+  myMain.style.display = "block";
+  myFooter.style.display = "block";
 }

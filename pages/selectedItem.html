@@ -13,21 +13,25 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="../styles/category.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <title>category Page</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <title>selected items Page</title>
   </head>
   <body onload="loadFunction()">
     <div  id="loader" class="loader position-absolute top-50 start-50 translate-middle">
+      <!-- <div class="spinner-border text-info " style="width: 5rem; height: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span> -->
         <div class="loader_cube loader_cube--color"></div>
         <div class="loader_cube loader_cube--glowing"></div>
       </div>
-    <header id="myHeader" style="display: none;">
+    </div>
+   
+    <header style="display: none;" id="myHeader">
       <nav class="navbar py-3" style="background-color: #d384a0">
         <div class="container ">
           <div class="drowpdown col-md-4">
@@ -35,8 +39,7 @@
               class="btn btn-secondary dropdown-toggle icon-select"
               type="button"
               id="dropdownMenuButton"
-              aria-expanded="false"
-              onclick="toggleMenu()"
+              aria-expanded="false" onclick="toggleMenu()"
             >
               <i class="fa fa-solid fa-user" style="font-size: 20px"></i>
             </button>
@@ -48,14 +51,14 @@
             </ul>
           </div>
 
-          <a id="title" class="navbar-brand mx-1 col-lg-3 text-light" href="main.html">Cosmetics shop</a>
+          <a id="title" class="navbar-brand mx-1 col-lg-3 text-light" href="#">Cosmetics shop</a>
           <div id="selected-item" class="rounded ">
             <button
               type="button"
               class="btn btn-secondary position-relative "
               id="selected-items"
             >
-              selected items
+              <a href="selectedItem.html" style="text-decoration: none; color: white;">selected items</a>
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black"
                 id="valueSelectedItem"
@@ -71,7 +74,7 @@
             data-bs-target="#staticBackdrop"
             aria-controls="staticBackdrop"
           >
-            <span class="navbar-toggler-icon t"></span>
+            <span class="navbar-toggler-icon "></span>
           </button>
         </div>
       </nav>
@@ -98,27 +101,24 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a
-                href=""
+                href="category.html?category=perfume"
                 class="nav-link active"
-                onclick="changeCategory('perfume')"
                 >perfume</a
               >
             </li>
             <li class="nav-item">
               <a
-                href=""
+              href="category.html?category=cosmetic"
                 class="nav-link active"
                 id="Cosmetics"
-                onclick="changeCategory('cosmetic')"
                 >Cosmetics</a
               >
             </li>
             <li class="nav-item">
               <a
-                href=""
+              href="category.html?category=SkinCare"
                 class="nav-link active"
                 id="SkinCare"
-                onclick="changeCategory('SkinCare')"
                 >Skin care</a
               >
             </li>
@@ -126,16 +126,17 @@
         </div>
       </menu>
     </header>
-    <main id="myMain" style="display: none;">
-      <div class="d-flex flex-wrap container flex-row my-5 text-center" id="product-list">
-      </div>
+    <main style="display: none;" id="myMain">
+
     </main>
     <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"
-  ></script>
-    <script src="./scripts/category.js"> </script>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./scripts/selectedItem.js"></script>
+
+
     <footer style="background-color: #929fba ; display: none;" class="text-light" id="myFooter">
       <div class="container mt-5 pb-4 pt-4">
         <div class="row">
@@ -143,7 +144,7 @@
           <div class="col-md-3 text-center">
             <h5 class="col1-title">About</h5>
             <p>This is perfume shop page .</p>
-            <p>
+               <p>
               Made with &#10084; by
               <a class="ml-1" href="main.html">Helia</a>
             </p>

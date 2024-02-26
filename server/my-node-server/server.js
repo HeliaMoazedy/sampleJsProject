@@ -15,14 +15,20 @@ app.use(function (req, res, next) {
 app.get("/bestSeller", (req, res) => {
   const data = require("./mockData/bestSeller.json");
   res.header("Content-Type", "application/json");
-  setTimeout(() => {
-    res.send(JSON.stringify(data));
-  }, 1500);
+  // setTimeout(() => {
+  //   res.send(JSON.stringify(data));
+  // }, 1500);
+  res.send(JSON.stringify(data));
 });
 
 // API endpoint for products
 app.get("/products", (req, res) => {
   const data = require("./mockData/products.json");
+  res.header("Content-Type", "application/json");
+  res.send(JSON.stringify(data));
+});
+app.get("/selectedItem", (req, res) => {
+  const data = require("./mockData/selectedItem.json");
   res.header("Content-Type", "application/json");
   res.send(JSON.stringify(data));
 });
