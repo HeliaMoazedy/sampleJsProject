@@ -27,11 +27,6 @@ app.get("/products", (req, res) => {
   res.header("Content-Type", "application/json");
   res.send(JSON.stringify(data));
 });
-// app.get("/selectedItem", (req, res) => {
-//   const data = require("./mockData/selectedItem.json");
-//   res.header("Content-Type", "application/json");
-//   res.send(JSON.stringify(data));
-// });
 
 // Start the server
 app.listen(PORT, () => {

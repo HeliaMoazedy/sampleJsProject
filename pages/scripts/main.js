@@ -2,7 +2,7 @@ function increaseValue(product) {
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   span.textContent = currentValue + 1;
-  localStorage.setItem("valueSelectedItem",span.textContent);
+  localStorage.setItem("valueSelectedItem", span.textContent);
   if (localStorage.getItem("selectedItems")) {
     //agar asan loacal stoge bashe
     const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
@@ -21,7 +21,7 @@ function increaseValue(product) {
       document.getElementById(`removeItem_${product.id}`).disabled = false;
       selectedItems.push({
         id: product.id,
-        name : product.name,
+        name: product.name,
         price: product.price,
         quantity: 1,
         image: product.image,
@@ -37,14 +37,14 @@ function increaseValue(product) {
       JSON.stringify([
         {
           id: product.id,
-          name : product.name,
+          name: product.name,
           price: product.price,
           quantity: 1,
           image: product.image,
         },
       ])
     );
-  } 
+  }
 }
 
 function deceaseValue(producId) {
@@ -73,6 +73,7 @@ function deceaseValue(producId) {
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   if (currentValue !== 0) span.textContent = currentValue - 1;
+  localStorage.setItem("valueSelectedItem", span.textContent);
 }
 
 const menuDrop = document.querySelector(".dropdown-menu");
@@ -122,7 +123,14 @@ fetch("http://localhost:3000/bestSeller")
         for (let i = 0; i < 3; i++) {
           let product = categoryProducts[i];
           let productElement = document.createElement("div");
-          productElement.classList.add("col-md-4", "col-12", "card", "mb-2","me-2");
+          productElement.classList.add(
+            "col-md-4",
+            "col-12",
+            "card",
+            "mb-2",
+            "me-2"
+          );
+          productElement.id = `boxContainer_${product.id}`;
 
           productElement.innerHTML = `
                 <h2 class="card-title mt-4">${product.name}</h2>
@@ -222,20 +230,3 @@ function showFunction() {
   myMain.style.display = "block";
   myFooter.style.display = "block";
 }
-// Get the carousel element
-// Get the carousel element
-let carousel = document.getElementById("carouselDark");
-
-// Initialize Hammer.js on the carousel element
-let hammer = new Hammer(carousel);
-
-// Listen for swipe events
-hammer.on("swipeleft", function() {
-    // Change to the next slide when swiping left
-    myCarousel.next();
-});
-
-hammer.on("swiperight", function() {
-    // Change to the previous slide when swiping right
-    myCarousel.prev();
-});

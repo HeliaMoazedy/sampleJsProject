@@ -58,28 +58,27 @@ function deceaseValue(productId) {
       if (selectedItems[currentItemIndex].quantity == 1) {
         selectedItems.splice(currentItemIndex, 1);
         let newQuantity = document.getElementById(`quantity_${productId}`);
-        newQuantity.textContent=0
+        newQuantity.textContent = 0;
         localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
         document.getElementById(`removeItem_${productId}`).disabled = true;
-        
       } else if (selectedItems[currentItemIndex].quantity > 1) {
         selectedItems[currentItemIndex].quantity--;
 
         let newQuantity = document.getElementById(`quantity_${productId}`);
         newQuantity.textContent--;
         localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-        console.log(newQuantity.textContent)
+        console.log(newQuantity.textContent);
       }
     }
   } else {
-    debugger
+    debugger;
     document.getElementById(`removeItem_${productId}`).style.display = true;
-    
   }
 
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   if (currentValue !== 0) span.textContent = currentValue - 1;
+  localStorage.setItem("valueSelectedItem", span.textContent);
 }
 
 const menuDrop = document.querySelector(".dropdown-menu");
@@ -150,11 +149,10 @@ if (selectedItemsMain) {
                          style="background-color: #929fba; width: 35px;height:38px"
                        >-</button>
                      </div> 
-                     <p class="card-price mt-1">Totall: $${product.price * product.quantity}</p>
+                     <p class="card-price mt-1" id="Totall_${product.id}">Totall: $${product.price * product.quantity}</p>
                       `;
 
     selectedItemsContainer.appendChild(productElement);
- 
   }
 }
 // Retrieve the value from localStorage when the other page loads
