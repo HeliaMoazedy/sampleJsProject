@@ -2,115 +2,115 @@
   "perfume": [
     {
       "id": 100,
-      "name": "coco",
+      "name": "Coco",
       "price": 200,
-      "image": "../images/coco.jpg"
+      "image": "https://i.postimg.cc/wT83ZT7x/coco.jpg"
     },
     {
       "id": 101,
-      "name": "channel",
+      "name": "Channel",
       "price": 300,
-      "image": "../images/channel.jpg"
+      "image": "https://i.postimg.cc/50jGxRMB/channel.jpg"
     },
     {
       "id": 102,
-      "name": "dior",
+      "name": "Dior",
       "price": 500,
-      "image": "../images/dior.jpg"
+      "image": "https://i.postimg.cc/fTYPTd1r/dior.jpg"
     },
     {
       "id": 103,
       "name": "Gucci",
       "price": 600,
-      "image": "../images/gucci.jpg"
+      "image": "https://i.postimg.cc/fRv3xnWz/Gucci.jpg"
     },
     {
       "id": 104,
       "name": "Burberry",
       "price": 300,
-      "image": "../images/Burberry.jpg"
+      "image": "https://i.postimg.cc/0QLt95nv/Burberry.jpg"
     },
     {
       "id": 105,
       "name": "Armani",
       "price": 100,
-      "image": "../images/Armani.jpg"
+      "image": "https://i.postimg.cc/yxXKwKbW/Armani.jpg"
     }
   ],
   "cosmetic": [
     {
       "id": 200,
-      "name": "lipstick",
+      "name": "Lipstick",
       "price": 200,
-      "image": "../images/lipstick.jpg"
+      "image": "https://i.postimg.cc/2yqvwHcH/lipstick.jpg"
     },
     {
       "id": 201,
-      "name": "concealer",
+      "name": "Concealer",
       "price": 300,
-      "image": "../images/concealer.jpg"
+      "image": "https://i.postimg.cc/ZKzfgR0F/concealer.jpg"
     },
     {
       "id": 202,
       "name": "Mascara",
       "price": 500,
-      "image": "../images/Mascara.jpg"
+      "image": "https://i.postimg.cc/NfMPhYVV/Mascara.jpg"
     },
     {
       "id": 203,
       "name": "Eyeliner",
       "price": 600,
-      "image": "../images/Eyeliner.png"
+      "image": "https://i.postimg.cc/MKN5hB1M/Eyeliner.png"
     },
     {
       "id": 204,
       "name": "Primer",
       "price": 800,
-      "image": "../images/Primer.jpg"
+      "image": "https://i.postimg.cc/0jtW6H6c/Primer.jpg"
     },
     {
       "id": 205,
       "name": "Face Powder",
       "price": 100,
-      "image": "../images/FacePowder.jpg"
+      "image": "https://i.postimg.cc/Yq73Rsyd/Face-Powder.jpg"
     }
   ],
   "SkinCare": [
     {
       "id": 300,
-      "name": "micellar water",
+      "name": "Micellar water",
       "price": 200,
-      "image": "../images/micellarWater.jpg"
+      "image": "https://i.postimg.cc/rppvzbNn/micellar-Water.jpg"
     },
     {
       "id": 301,
-      "name": "cream",
+      "name": "Cream",
       "price": 300,
-      "image": "../images/cream.jpg"
+      "image": "https://i.postimg.cc/QxnFCB5c/cream.jpg"
     },
     {
       "id": 302,
       "name": "Hydrabio",
       "price": 500,
-      "image": "../images/Hydrabio.jpg"
+      "image": "https://i.postimg.cc/bNjW1dR2/Hydrabio.jpg"
     },
     {
       "id": 303,
-      "name": "toner",
+      "name": "Toner",
       "price": 600,
-      "image": "../images/toner.jpg"
+      "image": "https://i.postimg.cc/ZqzKv6qv/toner.jpg"
     },
     {
       "id": 304,
-      "name": "sunscreen",
+      "name": "Sunscreen",
       "price": 800,
-      "image": "../images/sunscreen.jpg"
+      "image": "https://i.postimg.cc/GtmphrmM/sunscreen.jpg"
     },
     {
       "id": 305,
-      "name": "cleanser",
+      "name": "Cleanser",
       "price": 100,
-      "image": "../images/cleanser.jpg"
+      "image": "https://i.postimg.cc/MKx3vNW7/cleanser.jpg"
     }
   ]
 }

@@ -80,10 +80,10 @@
       </nav>
       <menu
         class="offcanvas offcanvas-end pt-3"
-        data-bs-backdrop="static"
         tabindex="-1"
         id="staticBackdrop"
         aria-labelledby="staticBackdropLabel"
+        data-bs-dismiss="offcanvas"
       >
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
@@ -127,7 +127,7 @@
       </menu>
     </header>
     <main style="display: none;" id="myMain">
-      <div id="carouselDark" class="carousel carousel-dark slide mt-2">
+      <div id="carouselDark" class="carousel carousel-dark slide mt-2" data-bs-ride="carousel">
         <div class="carousel-indicators"></div>
         <div class="carousel-inner"></div>
       </div>
@@ -140,10 +140,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="./scripts/main.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+   
 
     <footer style="background-color: #929fba ; display: none;" class="text-light" id="myFooter">
       <div class="container mt-5 pb-4 pt-4">

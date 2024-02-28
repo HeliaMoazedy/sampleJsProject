@@ -1,22 +1,81 @@
-function inceaseValue(producId) {
-  console.log(producId);
-  localStorage.setItem("product id ", producId);
-  let productStorage = json.parseInt(localStorage.getItem(producId));
-
+function increaseValue(product) {
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   span.textContent = currentValue + 1;
+  localStorage.setItem("valueSelectedItem",span.textContent);
+  if (localStorage.getItem("selectedItems")) {
+    //agar asan loacal stoge bashe
+    const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+    const currentItemIndex = selectedItems.findIndex(
+      (item) => item.id == product.id
+    );
+
+    //agar mahsol mord nazar bod
+    if (currentItemIndex !== -1) {
+      selectedItems[currentItemIndex].quantity++;
+      document.getElementById(`removeItem_${product.id}`).disabled = false;
+
+      localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+    } // mahsol jadid bara avalin bar
+    else {
+      document.getElementById(`removeItem_${product.id}`).disabled = false;
+      selectedItems.push({
+        id: product.id,
+        name : product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image,
+      });
+      localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+    }
+  } //bara avalin bar ye mahsol be local storage ba in sakhtar ezafe she
+  else {
+    document.getElementById(`removeItem_${product.id}`).disabled = false;
+
+    localStorage.setItem(
+      "selectedItems",
+      JSON.stringify([
+        {
+          id: product.id,
+          name : product.name,
+          price: product.price,
+          quantity: 1,
+          image: product.image,
+        },
+      ])
+    );
+  } 
 }
+
 function deceaseValue(producId) {
-  console.log(producId);
-  localStorage.removeItem(producId);
+  if (localStorage.getItem("selectedItems")) {
+    //agar asan loacal stoge bashe
+    const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+    const currentItemIndex = selectedItems.findIndex(
+      (item) => item.id == producId
+    );
+    //agar mahsol mord nazar bod
+
+    if (currentItemIndex !== -1) {
+      if (selectedItems[currentItemIndex].quantity == 1) {
+        selectedItems.splice(currentItemIndex, 1);
+        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+        document.getElementById(`removeItem_${producId}`).disabled = true;
+      } else if (selectedItems[currentItemIndex].quantity > 1) {
+        selectedItems[currentItemIndex].quantity--;
+        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+      }
+    }
+  } else {
+    document.getElementById(`removeItem_${producId}`).style.display = true;
+  }
+
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   if (currentValue !== 0) span.textContent = currentValue - 1;
 }
 
 const menuDrop = document.querySelector(".dropdown-menu");
-
 const toggleMenu = () => menuDrop.classList.toggle("show");
 
 window.onclick = (event) => {
@@ -57,29 +116,30 @@ fetch("http://localhost:3000/bestSeller")
         `;
         let row = document.createElement("div");
         row.classList.add("row");
+        row.classList.add("flex-nowrap");
         outerElement.appendChild(row);
 
         for (let i = 0; i < 3; i++) {
           let product = categoryProducts[i];
           let productElement = document.createElement("div");
-          productElement.classList.add("col-md-4", "col-12", "card", "mb-2");
+          productElement.classList.add("col-md-4", "col-12", "card", "mb-2","me-2");
+
           productElement.innerHTML = `
                 <h2 class="card-title mt-4">${product.name}</h2>
                 <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
                 <p class="card-price  me-2 my-4">Price: $${product.price}
-                <a
-                  href="#"
-                  class="btn btn-secondary "
-                  onclick="inceaseValue(${product.id})"
+                <button
+                  class="btn btn-secondary " 
+                  onclick="increaseValue(${JSON.stringify(product).replace(/"/g, "&quot;")})"
                   style="background-color: #929fba; width: 35px"
-                  >+</a>
-                  <a
-                    href="#"
+                  >+</button>
+                  <button
+                  disabled="disabled"
                     class="btn btn-secondary"
-                    id="removeItem"
+                    id="removeItem_${product.id}"
                     onclick="deceaseValue(${product.id})"
-                    style="background-color: #929fba; width: 35px"
-                  >-</a>
+                    style="background-color: #929fba; width: 35px;"
+                  >-</button>
                   </p>
                 `;
 
@@ -162,23 +222,20 @@ function showFunction() {
   myMain.style.display = "block";
   myFooter.style.display = "block";
 }
-// $("#carouselDark").swipe({
-//   swipe: function (
-//     event,
-//     direction,
-//     distance,
-//     duration,
-//     fingerCount,
-//     fingerData
-//   ) {
-//     if (direction == left) $(this).carousel("prev");
-//     if (direction == right) $(this).carousel("next");
-//   },
-// });
-$("#carouselDark").on("wheel", function (e) {
-  if (e.originalEvent.deltaY < 0) {
-    $(this).carousel("next");
-  } else {
-    $(this).carousel("prev");
-  }
+// Get the carousel element
+// Get the carousel element
+let carousel = document.getElementById("carouselDark");
+
+// Initialize Hammer.js on the carousel element
+let hammer = new Hammer(carousel);
+
+// Listen for swipe events
+hammer.on("swipeleft", function() {
+    // Change to the next slide when swiping left
+    myCarousel.next();
+});
+
+hammer.on("swiperight", function() {
+    // Change to the previous slide when swiping right
+    myCarousel.prev();
 });

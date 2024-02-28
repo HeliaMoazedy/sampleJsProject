@@ -3,21 +3,21 @@
     "perfume": [
       {
         "id": 100,
-        "name": "coco",
+        "name": "Coco",
         "price": 200,
-        "image": "../images/coco.jpg"
+        "image": "https://i.postimg.cc/wT83ZT7x/coco.jpg"
       },
       {
         "id": 103,
         "name": "Gucci",
         "price": 600,
-        "image": "../images/gucci.jpg"
+        "image": "https://i.postimg.cc/fRv3xnWz/Gucci.jpg"
       },
       {
         "id": 105,
         "name": "Armani",
         "price": 100,
-        "image": "../images/Armani.jpg"
+        "image": "https://i.postimg.cc/yxXKwKbW/Armani.jpg"
       }
     ],
     "cosmetic": [
@@ -25,45 +25,45 @@
         "id": 202,
         "name": "Mascara",
         "price": 500,
-        "image": "../images/Mascara.jpg"
+        "image": "https://i.postimg.cc/NfMPhYVV/Mascara.jpg"
       },
       {
         "id": 203,
         "name": "Eyeliner",
         "price": 600,
-        "image": "../images/Eyeliner.png"
+        "image": "https://i.postimg.cc/MKN5hB1M/Eyeliner.png"
       },
       {
         "id": 204,
         "name": "Primer",
         "price": 800,
-        "image": "../images/Primer.jpg"
+        "image": "https://i.postimg.cc/0jtW6H6c/Primer.jpg"
       },
       {
         "id": 200,
-        "name": "lipstick",
+        "name": "Lipstick",
         "price": 200,
-        "image": "../images/lipstick.jpg"
+        "image": "https://i.postimg.cc/2yqvwHcH/lipstick.jpg"
       }
     ],
     "SkinCare": [
       {
         "id": 300,
-        "name": "micellar water",
+        "name": "Micellar water",
         "price": 200,
-        "image": "../images/micellarWater.jpg"
+        "image": "https://i.postimg.cc/rppvzbNn/micellar-Water.jpg"
       },
       {
         "id": 302,
         "name": "Hydrabio",
         "price": 500,
-        "image": "../images/Hydrabio.jpg"
+        "image": "https://i.postimg.cc/bNjW1dR2/Hydrabio.jpg"
       },
       {
         "id": 305,
-        "name": "cleanser",
+        "name": "Cleanser",
         "price": 100,
-        "image": "../images/cleanser.jpg"
+        "image": "https://i.postimg.cc/MKx3vNW7/cleanser.jpg"
       }
     ]
   },
@@ -71,18 +71,18 @@
     {
       "id": 1000,
       "name": "Armani",
-      "image": "../images//ArmaniPerfume.jpg"
+      "image": "https://i.postimg.cc/bJydGqBX/Armani-Perfume.avif"
     },
     {
       "id": 1002,
       "name": "Burberry",
-      "image": "../images/BurberryBanner.jpg"
+      "image": "https://i.postimg.cc/xdWtYFxb/Burberry-Banner.jpg"
     },
     {
       "id": 1003,
-      "name": "Gucci",
+      "name": "Dior",
       "price": 600,
-      "image": "../images/diorBanner.jpg"
+      "image": "https://i.postimg.cc/xdKbJxjm/dior-Banner.jpg"
     }
   ]
 }
