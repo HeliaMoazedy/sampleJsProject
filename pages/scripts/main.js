@@ -2,7 +2,7 @@ function increaseValue(product) {
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   span.textContent = currentValue + 1;
-  localStorage.setItem("valueSelectedItem", span.textContent);
+ 
   if (localStorage.getItem("selectedItems")) {
     //agar asan loacal stoge bashe
     const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
@@ -76,24 +76,6 @@ function deceaseValue(producId) {
   localStorage.setItem("valueSelectedItem", span.textContent);
 }
 
-const menuDrop = document.querySelector(".dropdown-menu");
-const toggleMenu = () => menuDrop.classList.toggle("show");
-
-window.onclick = (event) => {
-  if (!event.target.matches(".icon-select")) {
-    if (menuDrop.classList.contains("show")) {
-      menuDrop.classList.remove("show");
-    }
-  }
-};
-
-document.addEventListener("click", function (event) {
-  const menu = document.getElementById("staticBackdrop");
-  const body = document.querySelector(".offcanvas-body");
-  if (!menu.contains(event.target) && !body.contains(event.target)) {
-    menu.classList.remove("show");
-  }
-});
 
 fetch("http://localhost:3000/bestSeller")
   .then((response) => response.json())
@@ -117,18 +99,17 @@ fetch("http://localhost:3000/bestSeller")
         `;
         let row = document.createElement("div");
         row.classList.add("row");
-        row.classList.add("flex-nowrap");
         outerElement.appendChild(row);
 
         for (let i = 0; i < 3; i++) {
           let product = categoryProducts[i];
           let productElement = document.createElement("div");
+          productElement.style="width: 27rem;"
           productElement.classList.add(
             "col-md-4",
             "col-12",
             "card",
-            "mb-2",
-            "me-2"
+            "mb-2","me-2"
           );
           productElement.id = `boxContainer_${product.id}`;
 
@@ -154,13 +135,7 @@ fetch("http://localhost:3000/bestSeller")
           row.appendChild(productElement);
         }
       }
-    }
-  })
-  .catch((error) => console.error("Error loading JSON:", error));
-
-fetch("http://localhost:3000/bestSeller")
-  .then((response) => response.json())
-  .then((data) => {
+    }//carosel
     let carousel = document.getElementById("carouselDark");
     let carouselIndicators = document.getElementsByClassName(
       "carousel-indicators"
@@ -214,7 +189,7 @@ fetch("http://localhost:3000/bestSeller")
       carouselInner.appendChild(carouselItem);
     });
   })
-  .catch((error) => console.log("500 : Error loading JSON:", error));
+  .catch((error) => console.error("Error loading JSON:", error));
 
 function loadFunction() {
   let load = setTimeout(showFunction, 1500);

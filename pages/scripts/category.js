@@ -72,30 +72,10 @@ function deceaseValue(producId, productPrice) {
   let span = document.getElementById("valueSelectedItem");
   let currentValue = parseInt(span.textContent);
   if (currentValue !== 0) span.textContent = currentValue - 1;
+  localStorage.setItem("valueSelectedItem", span.textContent);
+
 
 }
-
-// Handle click event for dropdown toggle
-const menu = document.querySelector(".dropdown-menu");
-
-const toggleMenu = () => menu.classList.toggle("show");
-
-window.onclick = (event) => {
-  if (!event.target.matches(".icon-select")) {
-    if (menu.classList.contains("show")) {
-      menu.classList.remove("show");
-    }
-  }
-};
-
-document.addEventListener("click", function (event) {
-  const menu = document.getElementById("staticBackdrop");
-  const body = document.querySelector(".offcanvas-body");
-  if (!menu.contains(event.target) && !body.contains(event.target)) {
-    menu.classList.remove("show");
-  }
-});
-
 
 // Construct URLSearchParams object instance from current URL querystring.
 var queryParams = new URLSearchParams(window.location.search);
@@ -115,8 +95,9 @@ function fetchAndDisplayProducts(category) {
         var products = data[category];
         products.forEach((product) => {
           var productElement = document.createElement("div");
-          productElement.classList.add("col-lg-4", "col-12", "card", "mb-2");
-
+          productElement.style="max-width: 26rem;"
+          productElement.classList.add("col-md-4", "col-12", "card", "mb-2","me-2");
+          
           productElement.innerHTML =  `
           <h2 class="card-title mt-4">${product.name}</h2>
           <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">

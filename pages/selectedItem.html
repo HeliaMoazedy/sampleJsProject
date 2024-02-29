@@ -22,16 +22,8 @@
     <link rel="stylesheet" href="../styles/main.css">
     <title>selected items Page</title>
   </head>
-  <body onload="loadFunction()">
-    <div  id="loader" class="loader position-absolute top-50 start-50 translate-middle">
-      <!-- <div class="spinner-border text-info " style="width: 5rem; height: 5rem;" role="status">
-        <span class="visually-hidden">Loading...</span> -->
-        <div class="loader_cube loader_cube--color"></div>
-        <div class="loader_cube loader_cube--glowing"></div>
-      </div>
-    </div>
-   
-    <header style="display: none;" id="myHeader">
+  <body>
+    <header>
       <nav class="navbar py-3" style="background-color: #d384a0">
         <div class="container ">
           <div class="drowpdown col-md-4">
@@ -126,7 +118,7 @@
         </div>
       </menu>
     </header>
-    <main style="display: none;" id="myMain">
+    <main >
       <h1 class="text-center mt-3">Selected items</h1>
       <div id="selectedItem" class="d-flex flex-wrap container flex-row my-5 text-center" ></div>
     </main>
@@ -136,9 +128,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="./scripts/selectedItem.js"></script>
-
+    <script src="./scripts/common.js"></script>
           
-    <footer style="background-color: #929fba ; display: none;" class="text-light" id="myFooter">
+    <footer style="background-color: #929fba ;" class="text-light" id="myFooter">
       <div class="container mt-5 pb-4 pt-4">
         <div class="row">
           <!-- first col -->
