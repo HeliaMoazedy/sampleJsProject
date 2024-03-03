@@ -12,7 +12,7 @@ function increaseValue(product) {
      
       let newQuantity = document.getElementById(`quantity_${product.id}`);
       newQuantity.textContent++;
-
+      
       let totalPriceElement = document.getElementById(`Totall_${product.id}`);
       let totalPrice = product.price * parseInt(newQuantity.textContent);
       totalPriceElement.textContent ="Totall:$ "+ totalPrice ;
@@ -135,6 +135,7 @@ if (selectedItemsMain) {
                      <p class="card-price mt-1" id="Totall_${product.id}">Totall: $${product.price * product.quantity}</p>
                       `;
 
+
     selectedItemsContainer.appendChild(productElement);
   }
 }
@@ -146,3 +147,26 @@ let storedValueCategory = localStorage.getItem("valueSelectedItemCategory");
 if (storedValue) {
   span.textContent = Number(storedValue) + Number(storedValueCategory);
 }
+
+function getInitialItemsQuantity(){
+  
+  const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+  if(selectedItems){
+    let count = 0
+    selectedItems.forEach(item => {
+      count += item.quantity   
+    })
+    return count
+  }
+  else
+  {
+    return 0 
+  }
+}
+
+
+// Call the function to show quantities for all products
+
+window.addEventListener('load', function () {
+  document.getElementById("valueSelectedItem").textContent =  getInitialItemsQuantity()
+})
