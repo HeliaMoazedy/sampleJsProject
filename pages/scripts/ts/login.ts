@@ -1,4 +1,3 @@
-const form = document.getElementById("myForm");
 const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
 const username = document.getElementById("username");
 const password = document.getElementById("password");

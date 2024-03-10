@@ -132,7 +132,7 @@ fetch("http://localhost:3000/bestSeller")
           let product = categoryProducts[i];
           let productQuantity = findItemQuantityInLocalStorageById(product.id);
           let productElement = document.createElement("div");
-          productElement.style = "width: 27rem;";
+          productElement.style.width = "27rem";
           productElement.classList.add(
             "col-md-4",
             "col-12",
