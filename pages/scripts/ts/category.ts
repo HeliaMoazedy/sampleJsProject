@@ -27,7 +27,7 @@ function increaseProductQuantity(product: Product): void {
     `quantity_${product.id}`
   );
 
-  if (getValueFromLocalStorage("selectedItems")) {
+  if (getValueFromLocalStorage(localStorageKeys.selectedItems)) {
     const currentItemIndex = selectedItems.findIndex(
       (item) => item.id == product.id
     );
@@ -38,7 +38,7 @@ function increaseProductQuantity(product: Product): void {
         Number(newQuantity.textContent) + 1
       ).toString();
 
-      persistToLocalStorage("selectedItems", selectedItems);
+      persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
     } else {
       removeItemBtn.disabled = false;
       newQuantity.textContent = (
@@ -53,12 +53,12 @@ function increaseProductQuantity(product: Product): void {
         quantity: 1,
         image: product.image,
       });
-      persistToLocalStorage("selectedItems", selectedItems);
+      persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
     }
   } else {
     removeItemBtn.disabled = false;
     newQuantity.textContent = "1";
-    persistToLocalStorage("selectedItems", {
+    persistToLocalStorage(localStorageKeys.selectedItems, {
       id: product.id,
       name: product.name,
       price: product.price,
@@ -131,7 +131,7 @@ function fetchAndDisplayProducts(category: string) {
           <p class="card-price  me-2 mt-1">Price: $${product.price}</p>
           <button
             class="btn btn-secondary me-2 " 
-            onclick="increaseProductValue(${JSON.stringify(product).replace(/"/g, "&quot;")})"
+            onclick="increaseProductQuantity(${JSON.stringify(product).replace(/"/g, "&quot;")})"
             style="background-color: #929fba; width: 35px ; height:38px"
             >+</button>
             <h3 id="quantity_${product.id}">${productQuantity}</h3>
@@ -139,7 +139,7 @@ function fetchAndDisplayProducts(category: string) {
             
               class="btn btn-secondary ms-2"
               id="removeItem_${product.id}"
-              onclick="deceaseProductValue(${product.id},${product.price})"
+              onclick="deceaseProductQuantity(${product.id},${product.price})"
               style="background-color: #929fba; width: 35px;height:38px"
             >-</button>
           </div> 
