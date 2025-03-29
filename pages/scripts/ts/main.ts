@@ -1,25 +1,48 @@
-function increaseValue(product) {
-  if (localStorage.getItem("selectedItems")) {
-    //agar asan loacal stoge bashe
-    const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+let selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+let valueSelectedItemSpan = document.getElementById("valueSelectedItem");
+
+enum localStorageKeys {
+  selectedItems = "selectedItems",
+  totalQuantity = "totalQuantity",
+}
+
+function persistToLocalStorage(key: string, data: any): void {
+  if (typeof data === "string") {
+    localStorage.setItem(key, data);
+  } else {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+}
+function getValueFromLocalStorage(data: any): any {
+  return localStorage.getItem(data);
+}
+
+function increaseProductQuantity(product: any): void {
+  const removeItemBtn = document.getElementById(
+    `removeItem_${product.id}`
+  ) as HTMLButtonElement;
+  let newQuantity: HTMLElement = document.getElementById(
+    `quantity_${product.id}`
+  );
+
+  if (getValueFromLocalStorage(localStorageKeys.selectedItems)) {
     const currentItemIndex = selectedItems.findIndex(
       (item) => item.id == product.id
     );
-    //agar mahsol mord nazar bod
     if (currentItemIndex !== -1) {
       selectedItems[currentItemIndex].quantity++;
-      document.getElementById(`removeItem_${product.id}`).disabled = false;
-      let newQuantity = document.getElementById(`quantity_${product.id}`);
-      newQuantity.textContent++;
+      removeItemBtn.disabled = false;
+      newQuantity.textContent = (
+        Number(newQuantity.textContent) + 1
+      ).toString();
 
-      localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-    } // mahsol jadid bara avalin bar
-    else {
-      document.getElementById(`removeItem_${product.id}`).disabled = false;
-      let newQuantity = document.getElementById(`quantity_${product.id}`);
-      newQuantity.textContent++;
-
-      document.getElementById(`removeItem_${product.id}`).disabled = false;
+      persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
+    } else {
+      removeItemBtn.disabled = false;
+      newQuantity.textContent = (
+        Number(newQuantity.textContent) + 1
+      ).toString();
+      removeItemBtn.disabled = false;
       selectedItems.push({
         id: product.id,
         name: product.name,
@@ -27,71 +50,67 @@ function increaseValue(product) {
         quantity: 1,
         image: product.image,
       });
-      localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+      persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
     }
-  } //bara avalin bar ye mahsol be local storage ba in sakhtar ezafe she
-  else {
-    document.getElementById(`removeItem_${product.id}`).disabled = false;
-    let newQuantity = document.getElementById(`quantity_${product.id}`);
-    newQuantity.textContent = 1;
-    localStorage.setItem(
-      "selectedItems",
-      JSON.stringify([
-        {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          quantity: 1,
-          image: product.image,
-        },
-      ])
-    );
+  } else {
+    removeItemBtn.disabled = false;
+    newQuantity.textContent = "1";
+    persistToLocalStorage(localStorageKeys.selectedItems, [
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image,
+      },
+    ]);
   }
   updateTotalSelectedItems();
 }
-function deceaseValue(productId, productPrice) {
-  if (localStorage.getItem("selectedItems")) {
-    //agar asan loacal stoge bashe
-    const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+function decreaseProductQuantity(productId: number): void {
+  const removeItemBtn = document.getElementById(
+    `removeItem_${productId}`
+  ) as HTMLButtonElement;
+  let newQuantity: HTMLElement = document.getElementById(
+    `quantity_${productId}`
+  );
+
+  if (getValueFromLocalStorage(localStorageKeys.selectedItems)) {
     const currentItemIndex = selectedItems.findIndex(
       (item) => item.id == productId
     );
-    //agar mahsol mord nazar bod
 
     if (currentItemIndex !== -1) {
       if (selectedItems[currentItemIndex].quantity == 1) {
         selectedItems.splice(currentItemIndex, 1);
-        let newQuantity = document.getElementById(`quantity_${productId}`);
-        newQuantity.textContent = 0;
-        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-        document.getElementById(`removeItem_${productId}`).disabled = true;
+        newQuantity.textContent = "0";
+        persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
+        removeItemBtn.disabled = true;
       } else if (selectedItems[currentItemIndex].quantity > 1) {
         selectedItems[currentItemIndex].quantity--;
 
-        let newQuantity = document.getElementById(`quantity_${productId}`);
-        newQuantity.textContent--;
-        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+        newQuantity.textContent = (
+          Number(newQuantity.textContent) - 1
+        ).toString();
+        persistToLocalStorage(localStorageKeys.selectedItems, selectedItems);
       }
     }
   } else {
-    document.getElementById(`removeItem_${productId}`).style.display = true;
+    removeItemBtn.disabled = true;
   }
   updateTotalSelectedItems();
 }
 
-function updateTotalSelectedItems() {
-  const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+function updateTotalSelectedItems(): void {
   let totalQuantity = 0;
   selectedItems.forEach((item) => {
     totalQuantity += item.quantity;
   });
-  localStorage.setItem("totalQuantity", totalQuantity);
-  document.getElementById("valueSelectedItem").textContent = totalQuantity;
+  persistToLocalStorage(localStorageKeys.totalQuantity, totalQuantity);
+  valueSelectedItemSpan.textContent = totalQuantity.toString();
 }
 
-function getInitialItemsQuantity() {
-  const selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
-
+function getInitialItemsQuantity(): number {
   if (selectedItems) {
     let count = 0;
     selectedItems.forEach((item) => {
@@ -130,9 +149,9 @@ fetch("http://localhost:3000/bestSeller")
 
         for (let i = 0; i < 3; i++) {
           let product = categoryProducts[i];
-          let productQuantity = findItemQuantityInLocalStorageById(product.id);
+          let productQuantity = findItemQuantityByIdInLocalStorage(product.id);
           let productElement = document.createElement("div");
-          productElement.style = "width: 27rem;";
+          productElement.style.width = "27rem";
           productElement.classList.add(
             "col-md-4",
             "col-12",
@@ -141,8 +160,7 @@ fetch("http://localhost:3000/bestSeller")
             "me-2"
           );
           productElement.id = `boxContainer_${product.id}`;
-          localStorage.getItem("selectedItems");
-
+          getValueFromLocalStorage(localStorageKeys.selectedItems);
           productElement.innerHTML = `
                 <h2 class="card-title mt-4">${product.name}</h2>
                 <img class= "mx-auto  d-block card-image-top rounded mt-2" src="${product.image}" alt="${product.name}">
@@ -150,7 +168,7 @@ fetch("http://localhost:3000/bestSeller")
                      <p class="card-price  me-2 mt-1">Price: $${product.price}</p>
                      <button
                        class="btn btn-secondary me-2 " 
-                       onclick="increaseValue(${JSON.stringify(product).replace(/"/g, "&quot;")})"
+                       onclick="increaseProductQuantity(${JSON.stringify(product).replace(/"/g, "&quot;")})"
                        style="background-color: #929fba; width: 35px ; height:38px"
                        >+</button>
                        <h3 id="quantity_${product.id}">${productQuantity}</h3>
@@ -158,7 +176,7 @@ fetch("http://localhost:3000/bestSeller")
                        
                          class="btn btn-secondary ms-2"
                          id="removeItem_${product.id}"
-                         onclick="deceaseValue(${product.id},${product.price})"
+                         onclick="decreaseProductQuantity(${product.id})"
                          style="background-color: #929fba; width: 35px;height:38px"
                        >-</button>
                      </div> 
@@ -191,7 +209,7 @@ fetch("http://localhost:3000/bestSeller")
       carousel.appendChild(btnPrev);
 
       let sapnPrev = document.createElement("span");
-      sapnPrev.setAttribute("aria-hidden", true);
+      sapnPrev.setAttribute("aria-hidden", "true");
       sapnPrev.classList.add("carousel-control-prev-icon");
       btnPrev.appendChild(sapnPrev);
 
@@ -202,7 +220,7 @@ fetch("http://localhost:3000/bestSeller")
       carousel.appendChild(btnNext);
 
       let sapnNext = document.createElement("span");
-      sapnNext.setAttribute("aria-hidden", true);
+      sapnNext.setAttribute("aria-hidden", "true");
       sapnNext.classList.add("carousel-control-next-icon");
       btnNext.appendChild(sapnNext);
 
@@ -222,7 +240,7 @@ fetch("http://localhost:3000/bestSeller")
   })
   .catch((error) => console.error("Error loading JSON:", error));
 
-function hideLoadingOverlay() {
+function hideLoadingOverlay(): void {
   const loader = document.getElementById("loader");
   const myHeader = document.getElementById("myHeader");
   const myMain = document.getElementById("myMain");
@@ -234,13 +252,11 @@ function hideLoadingOverlay() {
   myFooter.style.display = "block";
 }
 
-function findItemQuantityInLocalStorageById(productId) {
-  let selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
+function findItemQuantityByIdInLocalStorage(productId: number): number {
   let selectedItem = selectedItems?.find((item) => item.id === productId);
   return selectedItem ? selectedItem.quantity : 0;
 }
 
 window.addEventListener("load", function () {
-  document.getElementById("valueSelectedItem").textContent =
-    getInitialItemsQuantity();
+  valueSelectedItemSpan.textContent = getInitialItemsQuantity().toString();
 });
